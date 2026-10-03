@@ -1129,32 +1129,47 @@ html:has(.cjfl-landing) {
 }
 
 /* -------------------------------------------------------------- Footer */
+/*
+ * Matched to the footer of cjremodeling.services (measured on its home page at 1394px wide, 1:1):
+ * a 49px strip of the page background, then a vertical gradient #191919 -> #0e0f11; logo 240px wide,
+ * 60px below the top; three bordered boxes (1200px wide, 100px tall, columns 392 / 415 / 393);
+ * one gold copyright line.
+ */
 .cjfl-footer {
-	padding-block: clamp(2.5rem, 6vw, 4rem) 2rem;
-	background: var(--cjfl-surface);
+	margin-top: 49px;
+	padding-block: 60px 30px;
+	background: linear-gradient(180deg, #191919 0%, #0e0f11 100%);
 	text-align: center;
 }
 .cjfl-footer__brand {
-	display: inline-block;
+	display: block;
+	line-height: 0;
 }
 .cjfl-footer__logo {
-	width: auto;
-	height: 96px;
+	display: block;
+	width: 240px;
+	max-width: 100%;
+	height: auto;
 	margin-inline: auto;
 }
 .cjfl-footer__boxes {
 	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	margin: 2rem 0 0;
+	grid-template-columns: minmax(0, 392fr) minmax(0, 415fr) minmax(0, 393fr);
+	margin: 51px 0 0;
 	padding: 0;
 	border: 1px solid var(--cjfl-line);
 	list-style: none;
 }
 .cjfl-footer__boxes li {
-	padding: 1.4rem 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 98px;
+	padding: 0.5rem 1rem;
 	border-left: 1px solid var(--cjfl-line);
 	color: #fff;
-	font-size: 0.97rem;
+	font-size: 1rem;
+	line-height: 1.5;
 	word-break: break-word;
 }
 .cjfl-footer__boxes li:first-child {
@@ -1167,25 +1182,11 @@ html:has(.cjfl-landing) {
 .cjfl-footer__boxes a:hover {
 	color: var(--cjfl-gold);
 }
-.cjfl-footer__nav {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5rem 1.75rem;
-	justify-content: center;
-	margin-top: 1.75rem;
-}
-.cjfl-footer__nav a {
-	color: var(--cjfl-muted);
-	font-size: 0.95rem;
-	text-decoration: none;
-}
-.cjfl-footer__nav a:hover {
+.cjfl-footer .cjfl-footer__copy {
+	margin: 66px 0 0;
 	color: var(--cjfl-gold);
-}
-.cjfl-footer__copy {
-	margin-top: 1.5rem;
-	color: rgba(255, 255, 255, 0.55);
-	font-size: 0.88rem;
+	font-size: 1rem;
+	line-height: 1.5;
 }
 
 /* ------------------------------------------------- Sticky bar + WhatsApp */
