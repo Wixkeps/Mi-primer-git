@@ -21,12 +21,12 @@ $tel  = CJFL_Config::phone_href();
 					'class'    => 'cjfl-logo',
 					'alt'      => $cfg['legal_name'],
 					'loading'  => false,
-					'sizes'    => '140px',
+					'sizes'    => '(min-width: 961px) 200px, 140px',
 					'decoding' => 'sync',
 					// The hero photo is the LCP element: keep the browser's "high priority" slot for it.
 					'fetchpriority' => false,
 				),
-				'medium'
+				'large'
 			);
 			?>
 		</a>

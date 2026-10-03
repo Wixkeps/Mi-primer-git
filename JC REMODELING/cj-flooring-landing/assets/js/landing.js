@@ -103,7 +103,9 @@
 
 		event.preventDefault();
 		var form = target.querySelector('form') || (target.id === 'quote' ? doc.getElementById('cjfl-main-form') : null);
-		var top = target.getBoundingClientRect().top + window.pageYOffset - 100;
+		var header = doc.querySelector('.cjfl-header');
+		var offset = (header ? header.offsetHeight : 84) + 16; // the sticky header must not cover the form
+		var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
 		window.scrollTo({ top: Math.max(0, top), behavior: reduceMotion ? 'auto' : 'smooth' });
 		window.setTimeout(function () { focusFirstField(form); }, reduceMotion ? 0 : 650);
 	}

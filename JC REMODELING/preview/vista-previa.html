@@ -58,6 +58,14 @@
 	--cjfl-max: 1200px;
 	--cjfl-radius: 25px;
 	--cjfl-header-h: 84px;
+	/*
+	 * Header on desktop, matched to cjremodeling.services (measured on its home page, 1200px site width):
+	 * full-width bar, logo ~194 x 108 px, 52px from the left edge, gold button 62px from the right edge.
+	 * The vw values scale down below 1440px so the bar still fits on small laptops.
+	 */
+	--cjfl-hdr-pad-l: clamp(1.25rem, 3.61vw, 52px);
+	--cjfl-hdr-pad-r: clamp(1.25rem, 4.31vw, 62px);
+	--cjfl-logo-h: clamp(66px, 7.5vw, 108px);
 }
 
 /* ---------------------------------------------------------------- Base */
@@ -304,6 +312,18 @@ html:has(.cjfl-landing) {
 	gap: 1.5rem;
 	min-height: var(--cjfl-header-h);
 	padding-block: 0.4rem;
+	/* Full-width bar (not limited to the 1200px content column), like the main site. */
+	width: auto;
+	max-width: none;
+	margin-inline: 0;
+	padding-inline: var(--cjfl-gutter);
+}
+@media (min-width: 961px) {
+	.cjfl-header__inner {
+		padding-block: 17px; /* logo sits ~17px below the top edge, as on the main site */
+		padding-left: var(--cjfl-hdr-pad-l);
+		padding-right: var(--cjfl-hdr-pad-r);
+	}
 }
 .cjfl-header__brand {
 	flex: none;
@@ -313,6 +333,11 @@ html:has(.cjfl-landing) {
 	display: block;
 	width: auto;
 	height: 66px;
+}
+@media (min-width: 961px) {
+	.cjfl-logo {
+		height: var(--cjfl-logo-h);
+	}
 }
 .cjfl-nav {
 	display: flex;
@@ -1460,7 +1485,7 @@ html:has(.cjfl-landing) {
 <header class="cjfl-header" id="top">
 	<div class="cjfl-container cjfl-header__inner">
 		<a class="cjfl-header__brand" href="https://cjremodeling.services/" aria-label="CJ Remodeling Group - Home">
-			<img src="https://cjremodeling.services/wp-content/uploads/2026/09/Logo_website-removebg-preview.png" width="669" height="373" decoding="sync" class="cjfl-logo" alt="CJ Remodeling Group LLC" sizes="140px">		</a>
+			<img src="https://cjremodeling.services/wp-content/uploads/2026/09/Logo_website-removebg-preview.png" width="669" height="373" decoding="sync" class="cjfl-logo" alt="CJ Remodeling Group LLC" sizes="(min-width: 961px) 200px, 140px">		</a>
 
 		<nav class="cjfl-nav" aria-label="Primary">
 			<ul>
@@ -1891,7 +1916,7 @@ html:has(.cjfl-landing) {
 			<p class="cjfl-eyebrow">Good to know</p>
 			<h2 id="cjfl-faq-title" class="cjfl-h2">Flooring Installation FAQs</h2>
 							<p class="cjfl-updated">
-					Last updated:					<time datetime="2026-10-02">October 2026</time>
+					Last updated:					<time datetime="2026-10-03">October 2026</time>
 				</p>
 					</header>
 
@@ -2214,7 +2239,9 @@ html:has(.cjfl-landing) {
 
 		event.preventDefault();
 		var form = target.querySelector('form') || (target.id === 'quote' ? doc.getElementById('cjfl-main-form') : null);
-		var top = target.getBoundingClientRect().top + window.pageYOffset - 100;
+		var header = doc.querySelector('.cjfl-header');
+		var offset = (header ? header.offsetHeight : 84) + 16; // the sticky header must not cover the form
+		var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
 		window.scrollTo({ top: Math.max(0, top), behavior: reduceMotion ? 'auto' : 'smooth' });
 		window.setTimeout(function () { focusFirstField(form); }, reduceMotion ? 0 : 650);
 	}
