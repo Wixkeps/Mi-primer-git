@@ -9,6 +9,10 @@ defined( 'ABSPATH' ) || exit;
 
 $cfg  = CJFL_Config::all();
 $home = home_url( '/' );
+$self = get_permalink( get_queried_object_id() ); // This landing page itself ("Home" in this menu).
+if ( ! $self ) {
+	$self = '#top';
+}
 $tel  = CJFL_Config::phone_href();
 ?>
 <header class="cjfl-header" id="top">
@@ -33,10 +37,11 @@ $tel  = CJFL_Config::phone_href();
 
 		<nav class="cjfl-nav" aria-label="<?php esc_attr_e( 'Primary', 'cj-flooring-landing' ); ?>">
 			<ul>
-				<li><a href="<?php echo esc_url( $home ); ?>"><?php esc_html_e( 'Home', 'cj-flooring-landing' ); ?></a></li>
+				<li><a href="<?php echo esc_url( $self ); ?>"><?php esc_html_e( 'Home', 'cj-flooring-landing' ); ?></a></li>
 				<li><a href="#flooring"><?php esc_html_e( 'Flooring', 'cj-flooring-landing' ); ?></a></li>
 				<li><a href="#process"><?php esc_html_e( 'Process', 'cj-flooring-landing' ); ?></a></li>
 				<li><a href="#faq"><?php esc_html_e( 'FAQ', 'cj-flooring-landing' ); ?></a></li>
+				<li><a href="<?php echo esc_url( $home ); ?>"><?php esc_html_e( 'About us', 'cj-flooring-landing' ); ?></a></li>
 			</ul>
 		</nav>
 
